@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: RepublicOfData.io - Climate API
+  version: 1.0.0
+  description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
+paths:
+  /cubejs-api/v1/load:
+    get:
+      summary: Executes a query
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The JSON query to execute
+          example: '{"measures":["media_conversations.count"]}'
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  meta:
+                    type: array
+                    items:
+                      type: object
+      x-code-samples:
+        - lang: 'curl'
+          source: >
+            curl -H "Authorization: Bearer <your_token>" -G \
+              --data-urlencode 'query={"measures":["media_conversations.count"]}' \
+              https://<your_cubejs_instance>/cubejs-api/v1/load
