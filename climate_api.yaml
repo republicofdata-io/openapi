@@ -424,7 +424,7 @@ paths:
             label: Simple request
             source: |
               curl \
-                -H "Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA1MjQyMTZ9.a8JIRGEvYz2z8U7wJLCbMB_Yq1GKdDFWyS2yA1_O_A4" \
+                -H "Authorization: <TOKEN>" \
                 -G \
                 --data-urlencode 'query={
                     "limit": 5,
