@@ -1,39 +1,448 @@
 openapi: 3.1.0
 info:
   title: RepublicOfData.io API
-  version: 0.0.1
+  version: 0.1.0
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
+servers:
+  - url: https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1
 paths:
-  /cubejs-api/v1/load:
+  /load:
     get:
       summary: Executes a query
+      description: Get media articles and their associated social conversations
       parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-          description: The JSON query to execute
-          example: '{"measures":["media_conversations.count"]}'
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The JSON query to execute
+        example: '{"measures":["media_conversations.count"]}'
+      - name: article_url
+        in: query
+        schema:
+          type: string
+        description: URL of the article.
+      - name: article_source
+        in: query
+        schema:
+          type: string
+        description: Media source of the article.
+      - name: article_title
+        in: query
+        schema:
+          type: string
+        description: Title of the article.
+      - name: article_summary
+        in: query
+        schema:
+          type: string
+        description: Summary of the article.
+      - name: article_description
+        in: query
+        schema:
+          type: string
+        description: Description of the article.
+      - name: article_content
+        in: query
+        schema:
+          type: string
+        description: Content of the article.
+      - name: article_keywords
+        in: query
+        schema:
+          type: string
+        description: Keywords of the article.
+      - name: article_author
+        in: query
+        schema:
+          type: string
+        description: Author of the article.
+      - name: article_tags
+        in: query
+        schema:
+          type: string
+        description: Tags of the article.
+      - name: article_medias
+        in: query
+        schema:
+          type: string
+        description: Medias associated with the article.
+      - name: article_location_name
+        in: query
+        schema:
+          type: string
+        description: Main location covered by the article.
+      - name: article_location_toponomy_name
+        in: query
+        schema:
+          type: string
+        description: Main location's toponomy name covered by the article.
+      - name: article_location_country_name
+        in: query
+        schema:
+          type: string
+        description: Main location's country name covered by the article.
+      - name: article_location_country_code
+        in: query
+        schema:
+          type: string
+        description: Main location's country code covered by the article.
+      - name: article_location_admin1_name
+        in: query
+        schema:
+          type: string
+        description: Main location's administrative name covered by the article.
+      - name: article_location_admin1_code
+        in: query
+        schema:
+          type: string
+        description: Main location's administrative code covered by the article.
+      - name: article_location_latitude
+        in: query
+        schema:
+          type: string
+        description: Main location's latitude covered by the article.
+      - name: article_location_longitude
+        in: query
+        schema:
+          type: string
+        description: Main location's longitude covered by the article.
+      - name: article_publication_ts
+        in: query
+        schema:
+          type: string
+        description: Publication timestamp of the article.
+      - name: conversation_post_natural_key
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the conversation post.
+      - name: conversation_post_social_network
+        in: query
+        schema:
+          type: string
+        description: Social network of the conversation post.
+      - name: conversation_post_text
+        in: query
+        schema:
+          type: string
+        description: Text of the conversation post.
+      - name: conversation_post_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Creation timestamp of the conversation post.
+      - name: conversation_post_metrics
+        in: query
+        schema:
+          type: string
+        description: Metrics of the conversation post.
+      - name: conversation_post_author_natural_key
+        in: query
+        schema:
+          type: string
+        description: Post author's unique identifier.
+      - name: conversation_post_author
+        in: query
+        schema:
+          type: string
+        description: Post author's name.
+      - name: conversation_post_author_description
+        in: query
+        schema:
+          type: string
+        description: Post author's description.
+      - name: conversation_post_author_metrics
+        in: query
+        schema:
+          type: string
+        description: Post author's metrics.
+      - name: conversation_post_author_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Post author's creation timestamp.
+      - name: conversation_reply_natural_key
+        in: query
+        schema:
+          type: string
+        description: Reply's unique identifier.
+      - name: conversation_reply_text
+        in: query
+        schema:
+          type: string
+        description: Reply's text.
+      - name: conversation_reply_metrics
+        in: query
+        schema:
+          type: string
+        description: Reply's metrics.
+      - name: conversation_reply_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Reply's creation timestamp.
+      - name: conversation_reply_author_natural_key
+        in: query
+        schema:
+          type: string
+        description: Reply author's unique identifier.
+      - name: conversation_reply_author
+        in: query
+        schema:
+          type: string
+        description: Reply author's name.
+      - name: conversation_reply_author_description
+        in: query
+        schema:
+          type: string
+        description: Reply author's description.
+      - name: conversation_reply_author_metrics
+        in: query
+        schema:
+          type: string
+        description: Reply author's metrics.
+      - name: conversation_reply_author_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Reply author's creation timestamp.
       responses:
-        200:
+        '200':
           description: Successful response
           content:
             application/json:
               schema:
                 type: object
                 properties:
+                  query:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                      dimensions:
+                        type: array
+                        items:
+                          type: string
+                      timeDimensions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dimension:
+                              type: string
+                            granularity:
+                              type: string
+                            dateRange:
+                              type: array
+                              items:
+                                type: string
+                      order:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            desc:
+                              type: boolean
+                      timezone:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: object
+                      rowLimit:
+                        type: integer
                   data:
                     type: array
                     items:
                       type: object
-                  meta:
-                    type: array
-                    items:
-                      type: object
-      x-code-samples:
-        - lang: 'curl'
-          source: >
-            curl -H "Authorization: Bearer <your_token>" -G \
-              --data-urlencode 'query={"measures":["media_conversations.count"]}' \
-              https://<your_cubejs_instance>/cubejs-api/v1/load
+                      properties:
+                        media_conversations.article_url:
+                          type: string
+                        media_conversations.article_title:
+                          type: string
+                        media_conversations.article_keywords:
+                          type: string
+                        media_conversations.article_publication_ts.day:
+                          type: string
+                        media_conversations.article_publication_ts:
+                          type: string
+                  lastRefreshTime:
+                    type: string
+                  annotation:
+                    type: object
+                    properties:
+                      measures:
+                        type: object
+                      dimensions:
+                        type: object
+                        properties:
+                          media_conversations.article_url:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                              shortTitle:
+                                type: string
+                              type:
+                                type: string
+                          media_conversations.article_title:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                              shortTitle:
+                                type: string
+                              type:
+                                type: string
+                          media_conversations.article_keywords:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                              shortTitle:
+                                type: string
+                              type:
+                                type: string
+                      segments:
+                        type: object
+                      timeDimensions:
+                        type: object
+                        properties:
+                          media_conversations.article_publication_ts.day:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                              shortTitle:
+                                type: string
+                              type:
+                                type: string
+                          media_conversations.article_publication_ts:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                              shortTitle:
+                                type: string
+                              type:
+                                type: string
+                  dataSource:
+                    type: string
+                  dbType:
+                    type: string
+                  extDbType:
+                    type: string
+                  external:
+                    type: boolean
+                  slowQuery:
+                    type: boolean
+                  total:
+                    type: string
+              example:
+                query:
+                  limit: 5
+                  dimensions:
+                    - media_conversations.article_url
+                    - media_conversations.article_title
+                    - media_conversations.article_keywords
+                  timeDimensions:
+                    - dimension: media_conversations.article_publication_ts
+                      granularity: day
+                      dateRange:
+                        - "2024-03-11T00:00:00.000"
+                        - "2024-03-17T23:59:59.999"
+                  order:
+                    - id: media_conversations.article_url
+                      desc: false
+                  timezone: UTC
+                  filters: []
+                  rowLimit: 5
+                data:
+                  - media_conversations.article_url: "https://www.nytimes.com/2024/03/05/business/frank-popoff-dead.html"
+                    media_conversations.article_title: "frank popoff, who sought to lead a friendlier dow chemical, dies at 88"
+                    media_conversations.article_keywords: null
+                    media_conversations.article_publication_ts.day: "2024-03-12T00:00:00.000"
+                    media_conversations.article_publication_ts: "2024-03-12T00:00:00.000"
+                  - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/climate/tiny-forest-roosevelt-island.html"
+                    media_conversations.article_title: "coming soon to manhattan, a brand-new tiny forest"
+                    media_conversations.article_keywords: null
+                    media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
+                    media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
+                  - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/science/birds-birdwatching-record-kaestner.html"
+                    media_conversations.article_title: "with an orange-tufted spiderhunter, birder breaks record for sightings"
+                    media_conversations.article_keywords: null
+                    media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
+                    media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
+                  - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/science/meteor-avi-loeb.html"
+                    media_conversations.article_title: "surprise: an ‘extraterrestrial’ gadget was something more familiar"
+                    media_conversations.article_keywords: null
+                    media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
+                    media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
+                  - media_conversations.article_url: "https://www.nytimes.com/2024/03/12/books/review/lessons-for-survival-emily-raboteau.html"
+                    media_conversations.article_title: "book review: ‘lessons for survival,’ by emily raboteau"
+                    media_conversations.article_keywords: null
+                    media_conversations.article_publication_ts.day: "2024-03-12T00:00:00.000"
+                    media_conversations.article_publication_ts: "2024-03-12T00:00:00.000"
+                lastRefreshTime: "2024-03-13T13:42:34.000Z"
+                annotation:
+                  measures: {}
+                  dimensions:
+                    media_conversations.article_url:
+                      title: "Media Conversations Article Url"
+                      shortTitle: "Article Url"
+                      type: "string"
+                    media_conversations.article_title:
+                      title: "Media Conversations Article Title"
+                      shortTitle: "Article Title"
+                      type: "string"
+                    media_conversations.article_keywords:
+                      title: "Media Conversations Article Keywords"
+                      shortTitle: "Article Keywords"
+                      type: "string"
+                  segments: {}
+                  timeDimensions:
+                    media_conversations.article_publication_ts.day:
+                      title: "Media Conversations Article Publication Ts"
+                      shortTitle: "Article Publication Ts"
+                      type: "time"
+                    media_conversations.article_publication_ts:
+                      title: "Media Conversations Article Publication Ts"
+                      shortTitle: "Article Publication Ts"
+                      type: "time"
+                dataSource: "default"
+                dbType: "snowflake"
+                extDbType: "cubestore"
+                external: true
+                slowQuery: false
+                total: null
+      x-codeSamples:
+          - lang: curl
+            label: Simple request
+            source: |
+              curl \
+                -H "Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA1MjQyMTZ9.a8JIRGEvYz2z8U7wJLCbMB_Yq1GKdDFWyS2yA1_O_A4" \
+                -G \
+                --data-urlencode 'query={
+                    "limit": 5,
+                    "dimensions": [
+                        "media_conversations.article_url",
+                        "media_conversations.article_title",
+                        "media_conversations.article_keywords"
+                    ],
+                    "timeDimensions": [
+                        {
+                            "dimension": "media_conversations.article_publication_ts",
+                            "granularity": "day",
+                            "dateRange": "This week"
+                        }
+                    ],
+                    "order": {
+                        "media_conversations.article_url": "asc"
+                    }
+                }' \
+                https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1/load
+
