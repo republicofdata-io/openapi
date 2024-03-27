@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: RepublicOfData.io API
-  version: 0.1.0
+  version: 0.2.0
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
   - url: https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1
@@ -18,16 +18,36 @@ paths:
           type: string
         description: The JSON query to execute
         example: '{"measures":["media_conversations.count"]}'
-      - name: article_url
+      - name: media_conversation_pk
         in: query
         schema:
           type: string
-        description: URL of the article.
+        description: Unique identifier for the media conversation.
+      - name: media_article_fk
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the media article.
+      - name: social_network_conversation_fk
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the social network conversation.
+      - name: social_network_post_fk
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the social network post.
       - name: article_source
         in: query
         schema:
           type: string
         description: Media source of the article.
+      - name: article_url
+        in: query
+        schema:
+          type: string
+        description: URL of the article.
       - name: article_title
         in: query
         schema:
@@ -48,21 +68,16 @@ paths:
         schema:
           type: string
         description: Content of the article.
-      - name: article_keywords
-        in: query
-        schema:
-          type: string
-        description: Keywords of the article.
-      - name: article_author
-        in: query
-        schema:
-          type: string
-        description: Author of the article.
       - name: article_tags
         in: query
         schema:
           type: string
         description: Tags of the article.
+      - name: article_author
+        in: query
+        schema:
+          type: string
+        description: Author of the article.
       - name: article_medias
         in: query
         schema:
@@ -73,11 +88,6 @@ paths:
         schema:
           type: string
         description: Main location covered by the article.
-      - name: article_location_toponomy_name
-        in: query
-        schema:
-          type: string
-        description: Main location's toponomy name covered by the article.
       - name: article_location_country_name
         in: query
         schema:
@@ -113,101 +123,66 @@ paths:
         schema:
           type: string
         description: Publication timestamp of the article.
-      - name: conversation_post_natural_key
+      - name: article_modification_ts
         in: query
         schema:
           type: string
-        description: Unique identifier for the conversation post.
-      - name: conversation_post_social_network
+        description: Modification timestamp of the article.
+      - name: social_network_source
         in: query
         schema:
           type: string
-        description: Social network of the conversation post.
-      - name: conversation_post_text
+        description: Social network of the conversation and posts.
+      - name: conversation_natural_key
         in: query
         schema:
           type: string
-        description: Text of the conversation post.
-      - name: conversation_post_creation_ts
+        description: Unique identifier for the conversation.
+      - name: post_natural_key
         in: query
         schema:
           type: string
-        description: Creation timestamp of the conversation post.
-      - name: conversation_post_metrics
-        in: query
-        schema:
-          type: string
-        description: Metrics of the conversation post.
-      - name: conversation_post_author_natural_key
+        description: Unique identifier for the post.
+      - name: post_author_natural_key
         in: query
         schema:
           type: string
         description: Post author's unique identifier.
-      - name: conversation_post_author
+      - name: post_text
+        in: query
+        schema:
+          type: string
+        description: Text of the conversation post.
+      - name: post_author
         in: query
         schema:
           type: string
         description: Post author's name.
-      - name: conversation_post_author_description
+      - name: post_author_description
         in: query
         schema:
           type: string
         description: Post author's description.
-      - name: conversation_post_author_metrics
+      - name: post_metrics
+        in: query
+        schema:
+          type: string
+        description: Metrics of the conversation post.
+      - name: post_author_metrics
         in: query
         schema:
           type: string
         description: Post author's metrics.
-      - name: conversation_post_author_creation_ts
+      - name: post_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Creation timestamp of the conversation post.
+      - name: post_author_creation_ts
         in: query
         schema:
           type: string
         description: Post author's creation timestamp.
-      - name: conversation_reply_natural_key
-        in: query
-        schema:
-          type: string
-        description: Reply's unique identifier.
-      - name: conversation_reply_text
-        in: query
-        schema:
-          type: string
-        description: Reply's text.
-      - name: conversation_reply_metrics
-        in: query
-        schema:
-          type: string
-        description: Reply's metrics.
-      - name: conversation_reply_creation_ts
-        in: query
-        schema:
-          type: string
-        description: Reply's creation timestamp.
-      - name: conversation_reply_author_natural_key
-        in: query
-        schema:
-          type: string
-        description: Reply author's unique identifier.
-      - name: conversation_reply_author
-        in: query
-        schema:
-          type: string
-        description: Reply author's name.
-      - name: conversation_reply_author_description
-        in: query
-        schema:
-          type: string
-        description: Reply author's description.
-      - name: conversation_reply_author_metrics
-        in: query
-        schema:
-          type: string
-        description: Reply author's metrics.
-      - name: conversation_reply_author_creation_ts
-        in: query
-        schema:
-          type: string
-        description: Reply author's creation timestamp.
       responses:
         '200':
           description: Successful response
@@ -264,7 +239,7 @@ paths:
                           type: string
                         media_conversations.article_title:
                           type: string
-                        media_conversations.article_keywords:
+                        media_conversations.article_tags:
                           type: string
                         media_conversations.article_publication_ts.day:
                           type: string
@@ -298,7 +273,7 @@ paths:
                                 type: string
                               type:
                                 type: string
-                          media_conversations.article_keywords:
+                          media_conversations.article_tags:
                             type: object
                             properties:
                               title:
@@ -348,7 +323,7 @@ paths:
                   dimensions:
                     - media_conversations.article_url
                     - media_conversations.article_title
-                    - media_conversations.article_keywords
+                    - media_conversations.article_tags
                   timeDimensions:
                     - dimension: media_conversations.article_publication_ts
                       granularity: day
@@ -364,27 +339,27 @@ paths:
                 data:
                   - media_conversations.article_url: "https://www.nytimes.com/2024/03/05/business/frank-popoff-dead.html"
                     media_conversations.article_title: "frank popoff, who sought to lead a friendlier dow chemical, dies at 88"
-                    media_conversations.article_keywords: null
+                    media_conversations.article_tags: null
                     media_conversations.article_publication_ts.day: "2024-03-12T00:00:00.000"
                     media_conversations.article_publication_ts: "2024-03-12T00:00:00.000"
                   - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/climate/tiny-forest-roosevelt-island.html"
                     media_conversations.article_title: "coming soon to manhattan, a brand-new tiny forest"
-                    media_conversations.article_keywords: null
+                    media_conversations.article_tags: null
                     media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
                     media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
                   - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/science/birds-birdwatching-record-kaestner.html"
                     media_conversations.article_title: "with an orange-tufted spiderhunter, birder breaks record for sightings"
-                    media_conversations.article_keywords: null
+                    media_conversations.article_tags: null
                     media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
                     media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
                   - media_conversations.article_url: "https://www.nytimes.com/2024/03/11/science/meteor-avi-loeb.html"
                     media_conversations.article_title: "surprise: an ‘extraterrestrial’ gadget was something more familiar"
-                    media_conversations.article_keywords: null
+                    media_conversations.article_tags: null
                     media_conversations.article_publication_ts.day: "2024-03-11T00:00:00.000"
                     media_conversations.article_publication_ts: "2024-03-11T00:00:00.000"
                   - media_conversations.article_url: "https://www.nytimes.com/2024/03/12/books/review/lessons-for-survival-emily-raboteau.html"
                     media_conversations.article_title: "book review: ‘lessons for survival,’ by emily raboteau"
-                    media_conversations.article_keywords: null
+                    media_conversations.article_tags: null
                     media_conversations.article_publication_ts.day: "2024-03-12T00:00:00.000"
                     media_conversations.article_publication_ts: "2024-03-12T00:00:00.000"
                 lastRefreshTime: "2024-03-13T13:42:34.000Z"
@@ -399,9 +374,9 @@ paths:
                       title: "Media Conversations Article Title"
                       shortTitle: "Article Title"
                       type: "string"
-                    media_conversations.article_keywords:
-                      title: "Media Conversations Article Keywords"
-                      shortTitle: "Article Keywords"
+                    media_conversations.article_tags:
+                      title: "Media Conversations Article tags"
+                      shortTitle: "Article tags"
                       type: "string"
                   segments: {}
                   timeDimensions:
@@ -431,7 +406,7 @@ paths:
                     "dimensions": [
                         "media_conversations.article_url",
                         "media_conversations.article_title",
-                        "media_conversations.article_keywords"
+                        "media_conversations.article_tags"
                     ],
                     "timeDimensions": [
                         {
