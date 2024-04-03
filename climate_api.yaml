@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: RepublicOfData.io API
-  version: 0.2.0
+  version: 0.2.1
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
   - url: https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1
