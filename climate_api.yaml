@@ -83,41 +83,6 @@ paths:
         schema:
           type: string
         description: Medias associated with the article.
-      - name: article_location_name
-        in: query
-        schema:
-          type: string
-        description: Main location covered by the article.
-      - name: article_location_country_name
-        in: query
-        schema:
-          type: string
-        description: Main location's country name covered by the article.
-      - name: article_location_country_code
-        in: query
-        schema:
-          type: string
-        description: Main location's country code covered by the article.
-      - name: article_location_admin1_name
-        in: query
-        schema:
-          type: string
-        description: Main location's administrative name covered by the article.
-      - name: article_location_admin1_code
-        in: query
-        schema:
-          type: string
-        description: Main location's administrative code covered by the article.
-      - name: article_location_latitude
-        in: query
-        schema:
-          type: string
-        description: Main location's latitude covered by the article.
-      - name: article_location_longitude
-        in: query
-        schema:
-          type: string
-        description: Main location's longitude covered by the article.
       - name: article_publication_ts
         in: query
         schema:
@@ -163,6 +128,11 @@ paths:
         schema:
           type: string
         description: Post author's description.
+      - name: post_author_location
+        in: query
+        schema:
+          type: string
+        description: Post author's location.
       - name: post_metrics
         in: query
         schema:
