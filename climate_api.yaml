@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: RepublicOfData.io API
-  version: 0.2.1
+  version: 0.2.2
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
   - url: https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1
@@ -38,6 +38,11 @@ paths:
         schema:
           type: string
         description: Unique identifier for the social network post.
+      - name: social_network_user_profile_fk
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the social network user profile.
       - name: article_source
         in: query
         schema:
@@ -108,51 +113,71 @@ paths:
         schema:
           type: string
         description: Unique identifier for the post.
-      - name: post_author_natural_key
-        in: query
-        schema:
-          type: string
-        description: Post author's unique identifier.
       - name: post_text
         in: query
         schema:
           type: string
         description: Text of the conversation post.
-      - name: post_author
-        in: query
-        schema:
-          type: string
-        description: Post author's name.
-      - name: post_author_description
-        in: query
-        schema:
-          type: string
-        description: Post author's description.
-      - name: post_author_location
-        in: query
-        schema:
-          type: string
-        description: Post author's location.
       - name: post_metrics
         in: query
         schema:
           type: string
         description: Metrics of the conversation post.
-      - name: post_author_metrics
-        in: query
-        schema:
-          type: string
-        description: Post author's metrics.
       - name: post_creation_ts
         in: query
         schema:
           type: string
         description: Creation timestamp of the conversation post.
-      - name: post_author_creation_ts
+      - name: social_network_profile_natural_key
+        in: query
+        schema:
+          type: string
+        description: Unique identifier for the social network profile.
+      - name: social_network_profile_username
+        in: query
+        schema:
+          type: string
+        description: Username of the social network profile.
+      - name: social_network_profile_location_name
+        in: query
+        schema:
+          type: string
+        description: Location name of the social network profile.
+      - name: social_network_profile_location_country_name
+        in: query
+        schema:
+          type: string
+        description: Country name of the social network profile.
+      - name: social_network_profile_location_country_code
+        in: query
+        schema:
+          type: string
+        description: Country code of the social network profile.
+      - name: social_network_profile_location_admin1_name
+        in: query
+        schema:
+          type: string
+        description: Admin1 name of the social network profile.
+      - name: social_network_profile_location_admin1_code
+        in: query
+        schema:
+          type: string
+        description: Admin1 code of the social network profile.
+      - name: social_network_profile_location_latitude
         in: query
         schema:
           type: string
         description: Post author's creation timestamp.
+      - name: social_network_profile_location_longitude
+        in: query
+        schema:
+          type: string
+        description: Post author's creation timestamp.
+      - name: social_network_profile_creation_ts
+        in: query
+        schema:
+          type: string
+        description: Creation timestamp of the social network profile.
       responses:
         '200':
           description: Successful response
