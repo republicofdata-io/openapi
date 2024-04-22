@@ -4,7 +4,7 @@ info:
   version: 0.2.2
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
-  - url: https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1
+  - url: https://neighbouring-rhinoceros.gcp-us-central1.cubecloudapp.dev/cubejs-api/v1/load
 paths:
   /load:
     get:
@@ -414,5 +414,5 @@ paths:
                         "media_conversations.article_url": "asc"
                     }
                 }' \
-                https://linguistic-weasel.aws-us-east-1.cubecloudapp.dev/cubejs-api/v1/load
+                https://neighbouring-rhinoceros.gcp-us-central1.cubecloudapp.dev/cubejs-api/v1/load
 
