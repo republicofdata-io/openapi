@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: RepublicOfData.io API
-  version: 0.2.2
+  version: 0.2.3
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
   - url: https://neighbouring-rhinoceros.gcp-us-central1.cubecloudapp.dev/cubejs-api/v1/load
@@ -118,11 +118,36 @@ paths:
         schema:
           type: string
         description: Text of the conversation post.
-      - name: post_metrics
+      - name: post_impression_count
         in: query
         schema:
-          type: string
-        description: Metrics of the conversation post.
+          type: number
+        description: The number of impressions of the post.
+      - name: post_reply_count
+        in: query
+        schema:
+          type: number
+        description: The number of replies of the post.
+      - name: post_quote_count
+        in: query
+        schema:
+          type: number
+        description: The number of quotes of the post.
+      - name: post_like_count
+        in: query
+        schema:
+          type: number
+        description: The number of likes of the post.
+      - name: post_retweet_count
+        in: query
+        schema:
+          type: number
+        description: The number of retweets of the post.
+      - name: post_bookmark_count
+        in: query
+        schema:
+          type: number
+        description: The number of bookmarks of the post.
       - name: post_creation_ts
         in: query
         schema:
