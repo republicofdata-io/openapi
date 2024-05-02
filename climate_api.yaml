@@ -4,7 +4,7 @@ info:
   version: 0.2.3
   description: The RepublicOfData.io API provides access to a proprietary data platform that captures and analyzes climate change narratives from traditional and social media sources. Our mission is to provide unique insights into climate narrative shifts to researchers, policymakers, journalists, activists, and other stakeholders.
 servers:
-  - url: https://neighbouring-rhinoceros.gcp-us-central1.cubecloudapp.dev/cubejs-api/v1/load
+  - url: https://neighbouring-rhinoceros.gcp-us-central1.cubecloudapp.dev/cubejs-api/v1
 paths:
   /load:
     get:
